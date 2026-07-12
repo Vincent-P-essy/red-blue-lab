@@ -9,6 +9,7 @@ one thread, not N.
 
 from __future__ import annotations
 
+import contextlib
 import selectors
 import socket
 import threading
@@ -61,9 +62,7 @@ class MultiPortHost:
         if self._thread:
             self._thread.join(timeout=1)
         for s in self._listeners:
-            try:
+            with contextlib.suppress(KeyError, ValueError):
                 self._sel.unregister(s)
-            except (KeyError, ValueError):
-                pass
             s.close()
         self._sel.close()
