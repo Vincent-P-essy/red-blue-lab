@@ -1,0 +1,12 @@
+services:
+  # The whole lab runs self-contained in one container: it boots the target,
+  # the blue engine and the red team, then exits non-zero on any missed
+  # detection. Mount ./out to collect the HTML/JSON report.
+  lab:
+    build: .
+    environment:
+      RBL_DETECTION_BUDGET_S: ${RBL_DETECTION_BUDGET_S:-5.0}
+      RBL_FAIL_UNDER: ${RBL_FAIL_UNDER:-100}
+      RBL_REPORT_PATH: /out/report.html
+    volumes:
+      - ./out:/out
