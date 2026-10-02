@@ -1,0 +1,42 @@
+{
+  "jobs": [
+    {
+      "root": ".",
+      "label": "red-blue-lab",
+      "caption": "Five attack and detection scenarios executed entirely against the laboratory's loopback server, followed by local tests. No external system is targeted.",
+      "setup": [
+        [
+          "python",
+          "-m",
+          "pip",
+          "install",
+          "-r",
+          "requirements.txt"
+        ],
+        [
+          "python",
+          "-m",
+          "pip",
+          "install",
+          "pytest",
+          "requests",
+          "socksio"
+        ]
+      ],
+      "commands": [
+        [
+          "python",
+          "-m",
+          "lab.runner"
+        ],
+        [
+          "python",
+          "-m",
+          "pytest",
+          "-v",
+          "--tb=short"
+        ]
+      ]
+    }
+  ]
+}
